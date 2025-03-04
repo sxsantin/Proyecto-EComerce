@@ -1,0 +1,15 @@
+com\ecomerce\pedidos\client\dto\ProductoDTO.class
+com\ecomerce\pedidos\client\ProductoClient.class
+com\ecomerce\pedidos\controller\dto\DetallePedidoDTO.class
+com\ecomerce\pedidos\client\dto\UsuarioDTO.class
+com\ecomerce\pedidos\config\SecurityConfig.class
+com\ecomerce\pedidos\model\DetallePedido.class
+com\ecomerce\pedidos\model\Pedido.class
+com\ecomerce\pedidos\client\UsuarioClient.class
+com\ecomerce\pedidos\exception\PedidoException.class
+com\ecomerce\pedidos\PedidosApplication.class
+com\ecomerce\pedidos\service\PedidoService.class
+com\ecomerce\pedidos\controller\PedidoController.class
+com\ecomerce\pedidos\repository\PedidoRepository.class
+com\ecomerce\pedidos\controller\dto\PedidoResponseDTO.class
+com\ecomerce\pedidos\controller\dto\PedidoRequestDTO.class

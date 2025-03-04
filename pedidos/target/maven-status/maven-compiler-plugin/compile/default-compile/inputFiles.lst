@@ -1,0 +1,15 @@
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\client\ProductoClient.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\client\UsuarioClient.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\repository\PedidoRepository.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\controller\dto\DetallePedidoDTO.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\model\Pedido.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\controller\dto\PedidoRequestDTO.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\client\dto\UsuarioDTO.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\PedidosApplication.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\config\SecurityConfig.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\controller\PedidoController.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\model\DetallePedido.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\service\PedidoService.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\controller\dto\PedidoResponseDTO.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\exception\PedidoException.java
+C:\Users\juanc\OneDrive\Escritorio\distri\pedidos\src\main\java\com\ecomerce\pedidos\client\dto\ProductoDTO.java
