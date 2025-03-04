@@ -1,0 +1,12 @@
+com\ecomerce\security\dto\AuthResponseDTO$AuthResponseDTOBuilder.class
+com\ecomerce\security\dto\LoginRequestDTO.class
+com\ecomerce\security\dto\AuthResponseDTO.class
+com\ecomerce\security\model\Role.class
+com\ecomerce\security\controller\AuthController.class
+com\ecomerce\security\SecurityApplication.class
+com\ecomerce\security\service\AuthService.class
+com\ecomerce\security\model\Usuario.class
+com\ecomerce\security\service\JwtService.class
+com\ecomerce\security\config\SecurityConfig.class
+com\ecomerce\security\repository\UsuarioRepository.class
+com\ecomerce\security\dto\RegisterRequestDTO.class

@@ -1,0 +1,9 @@
+com\ecomerce\usuarios\controller\dto\UsuarioRequestDTO.class
+com\ecomerce\usuarios\config\SecurityConfig.class
+com\ecomerce\usuarios\repository\UsuarioRepository.class
+com\ecomerce\usuarios\service\UsuarioService.class
+com\ecomerce\usuarios\controller\dto\UsuarioResponseDTO.class
+com\ecomerce\usuarios\controller\UsuarioController.class
+com\ecomerce\usuarios\exception\UsuarioException.class
+com\ecomerce\usuarios\model\Usuario.class
+com\ecomerce\usuarios\UsuariosApplication.class

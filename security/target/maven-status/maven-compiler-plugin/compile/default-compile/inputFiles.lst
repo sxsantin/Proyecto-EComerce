@@ -1,0 +1,11 @@
+C:\Users\juanc\OneDrive\Escritorio\distri\security\src\main\java\com\ecomerce\security\dto\LoginRequestDTO.java
+C:\Users\juanc\OneDrive\Escritorio\distri\security\src\main\java\com\ecomerce\security\model\Usuario.java
+C:\Users\juanc\OneDrive\Escritorio\distri\security\src\main\java\com\ecomerce\security\service\AuthService.java
+C:\Users\juanc\OneDrive\Escritorio\distri\security\src\main\java\com\ecomerce\security\controller\AuthController.java
+C:\Users\juanc\OneDrive\Escritorio\distri\security\src\main\java\com\ecomerce\security\config\SecurityConfig.java
+C:\Users\juanc\OneDrive\Escritorio\distri\security\src\main\java\com\ecomerce\security\dto\AuthResponseDTO.java
+C:\Users\juanc\OneDrive\Escritorio\distri\security\src\main\java\com\ecomerce\security\SecurityApplication.java
+C:\Users\juanc\OneDrive\Escritorio\distri\security\src\main\java\com\ecomerce\security\model\Role.java
+C:\Users\juanc\OneDrive\Escritorio\distri\security\src\main\java\com\ecomerce\security\dto\RegisterRequestDTO.java
+C:\Users\juanc\OneDrive\Escritorio\distri\security\src\main\java\com\ecomerce\security\service\JwtService.java
+C:\Users\juanc\OneDrive\Escritorio\distri\security\src\main\java\com\ecomerce\security\repository\UsuarioRepository.java
