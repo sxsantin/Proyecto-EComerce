@@ -1,0 +1,9 @@
+com\ecomerce\productos\controller\dto\ProductoResponseDTO.class
+com\ecomerce\productos\service\ProductoService.class
+com\ecomerce\productos\ProductosApplication.class
+com\ecomerce\productos\model\Producto.class
+com\ecomerce\productos\exception\ProductoException.class
+com\ecomerce\productos\repository\ProductoRepository.class
+com\ecomerce\productos\config\SecurityConfig.class
+com\ecomerce\productos\controller\dto\ProductoRequestDTO.class
+com\ecomerce\productos\controller\ProductoController.class
