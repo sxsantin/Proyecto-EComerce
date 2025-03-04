@@ -1,0 +1,223 @@
+version: '3.8'
+
+services:
+  mysql-security:
+    image: mysql:8.0
+    container_name: mysql-security
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: security_db
+    ports:
+      - "13306:3306"
+    volumes:
+      - mysql_security_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ecommerce-network
+
+  mysql-usuarios:
+    image: mysql:8.0
+    container_name: mysql-usuarios
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: usuarios_db
+    ports:
+      - "13307:3306"
+    volumes:
+      - mysql_usuarios_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ecommerce-network
+
+  mysql-productos:
+    image: mysql:8.0
+    container_name: mysql-productos
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: productos_db
+    ports:
+      - "13308:3306"
+    volumes:
+      - mysql_productos_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ecommerce-network
+
+  mysql-pedidos:
+    image: mysql:8.0
+    container_name: mysql-pedidos
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: pedidos_db
+    ports:
+      - "13309:3306"
+    volumes:
+      - mysql_pedidos_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ecommerce-network
+
+  mysql-pagos:
+    image: mysql:8.0
+    container_name: mysql-pagos
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: pagos_db
+    ports:
+      - "13310:3306"
+    volumes:
+      - mysql_pagos_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ecommerce-network
+
+  security:
+    build: ./security
+    container_name: security
+    ports:
+      - "9000:9000"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-security:3306/security_db?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+
+    depends_on:
+      mysql-security:
+        condition: service_healthy
+    networks:
+      - ecommerce-network
+
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    ports:
+      - "8085:8080"
+    environment:
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://security:9000
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_ID=usuarios
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_URI=http://usuarios:8081
+      - SPRING_CLOUD_GATEWAY_ROUTES_0_PREDICATES_0=Path=/v1/usuarios/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_ID=productos
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_URI=http://productos:8082
+      - SPRING_CLOUD_GATEWAY_ROUTES_1_PREDICATES_0=Path=/v1/productos/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_2_ID=pedidos
+      - SPRING_CLOUD_GATEWAY_ROUTES_2_URI=http://pedidos:8083
+      - SPRING_CLOUD_GATEWAY_ROUTES_2_PREDICATES_0=Path=/v1/pedidos/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_3_ID=pagos
+      - SPRING_CLOUD_GATEWAY_ROUTES_3_URI=http://pagos:8084
+      - SPRING_CLOUD_GATEWAY_ROUTES_3_PREDICATES_0=Path=/v1/pagos/**
+      - SPRING_CLOUD_GATEWAY_ROUTES_4_ID=auth
+      - SPRING_CLOUD_GATEWAY_ROUTES_4_URI=http://security:9000
+      - SPRING_CLOUD_GATEWAY_ROUTES_4_PREDICATES_0=Path=/v1/auth/**
+      # Solo mantener el filtro de deduplicación para evitar cabeceras duplicadas
+      - SPRING_CLOUD_GATEWAY_DEFAULT-FILTERS_0=DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Access-Control-Allow-Methods Access-Control-Allow-Headers Access-Control-Max-Age Access-Control-Expose-Headers, RETAIN_FIRST
+      # Logging para depuración
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD_GATEWAY=DEBUG
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB_CORS=TRACE
+    depends_on:
+      - security
+    networks:
+      - ecommerce-network
+
+  usuarios:
+    build: ./usuarios
+    container_name: usuarios
+    ports:
+      - "8086:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-usuarios:3306/usuarios_db?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://security:9000
+    depends_on:
+      mysql-usuarios:
+        condition: service_healthy
+      security:
+        condition: service_started
+    networks:
+      - ecommerce-network
+
+  productos:
+    build: ./productos
+    container_name: productos
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-productos:3306/productos_db?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://security:9000
+    depends_on:
+      mysql-productos:
+        condition: service_healthy
+      security:
+        condition: service_started
+    networks:
+      - ecommerce-network
+
+  pedidos:
+    build: ./pedidos
+    container_name: pedidos
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-pedidos:3306/pedidos_db?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://security:9000
+    depends_on:
+      mysql-pedidos:
+        condition: service_healthy
+      security:
+        condition: service_started
+    networks:
+      - ecommerce-network
+
+  pagos:
+    build: ./pagos
+    container_name: pagos
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-pagos:3306/pagos_db?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://security:9000
+    depends_on:
+      mysql-pagos:
+        condition: service_healthy
+      security:
+        condition: service_started
+    networks:
+      - ecommerce-network
+
+networks:
+  ecommerce-network:
+    driver: bridge
+
+volumes:
+  mysql_security_data:
+  mysql_usuarios_data:
+  mysql_productos_data:
+  mysql_pedidos_data:
+  mysql_pagos_data: 
